@@ -2,9 +2,49 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>WebApp</title>
   </head>
-  <body>
-
+  <body id="app">
+    <div class="wrapper">
+        <div id="sidebar">
+            <div id="logo">
+                <img src="img/logo.png" id="app_naam" alt="My Traingsdata"> 
+            </div>
+            <div id="sidebar_wrapper">
+                <div id="user">
+                    <div id="photo_user">
+                       <!--  <img src="" alt="photo"> -->
+                    </div>
+                    <div id="info_user">
+                        <button id="user_button" class="show_hide"><span>Yentl Bekaert</span><i class="fas fa-sort-down"></i></button>
+                        <div id="user_options" style="display:none">
+                            <ul>
+                                <li><i class="fas fa-user"></i><span>Profile</span></li>
+                                <li><i class="fas fa-cog"></i><span>Settings</span></li>
+                                <li><i class="fas fa-sign-out-alt"></i><span>Logout</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="nav">
+                       <ul>
+                        <li id="dashboard_tab"><i class="fas fa-chart-pie"></i><span class="show_hide">dashboard</span></li>
+                        <li id="kalender_tab"><i class="fas fa-calendar"></i><span class="show_hide">calendar</span></li>
+                        <li id="food_corner_tab"><i class="fas fa-utensils"></i><span class="show_hide">food corner</span></li>
+                        <li id="weather_tab"><i class="fas fa-cloud-sun"></i><span class="show_hide">weather</span></li>
+                        <li id="performances_tab"><i class="fas fa-medal"></i><span class="show_hide">performances</span></li>
+                       </ul>
+                </div>
+               
+            </div>
+        </div>
+        <div id="mainpanelapp">
+          <div id="hamburger_button"><i class="fas fa-bars"></i></div>
+          <div id="mainpanelappcontent">
+            
+          </div>
+        </div>
+    </div>
   </body>
 </html>
