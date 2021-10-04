@@ -5,6 +5,16 @@ import './navigation';
 import _ from 'lodash';
 import Showdashboard from './dashboard';
 
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js').then(registration => {
+      console.log('SW registered: ', registration);
+    }).catch(registrationError => {
+      console.log('SW registration failed: ', registrationError);
+    });
+  });
+}
+
 const dashboard_button = document.getElementById("dashboard_tab");
 const calendar_button = document.getElementById("kalender_tab");
 const foodcorner_button = document.getElementById("food_corner_tab");
