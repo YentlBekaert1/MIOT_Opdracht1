@@ -12,7 +12,7 @@ const weather_button = document.getElementById("weather_tab");
 const performances_button = document.getElementById("performances_tab");
 const mainpanelappcontent = document.getElementById("mainpanelappcontent");
 
-mainpanelappcontent.innerHTML = "";
+mainpanelappcontent.innerHTML = Showdashboard();
 
 var active_tab = dashboard_button;
 var last_active_tab = dashboard_button;
