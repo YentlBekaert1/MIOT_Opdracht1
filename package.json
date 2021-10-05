@@ -26,10 +26,14 @@
     "webpack": "^5.54.0",
     "webpack-cli": "^4.8.0",
     "webpack-dev-server": "^4.3.0",
+    "webpack-pwa-manifest": "^4.3.0",
     "workbox-webpack-plugin": "^6.3.0"
   },
   "dependencies": {
+    "-": "^0.0.1",
     "@fortawesome/fontawesome-free": "^5.15.4",
+    "firebase-cli": "^1.2.0",
+    "firebase-tools": "^9.19.0",
     "lodash": "^4.17.21"
   }
 }
