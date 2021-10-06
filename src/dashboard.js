@@ -1,4 +1,9 @@
+import './strava_api';
+
 export default function Showdashboard() {
-    var element = "<h1>dashboard</h1>"
-    return element;
+    var element =  document.createElement("div");
+    var title = document.createElement("h1");
+    element.appendChild(title);
+    return element;  
   }
+  
