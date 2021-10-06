@@ -42,16 +42,16 @@
       "type": "image/png"
     }
   ],
-  "name": "My Progressive Web App",
-  "short_name": "MyPWA",
+  "name": "MyTrainingsData",
+  "short_name": "MTD",
   "orientation": "portrait",
   "display": "standalone",
   "start_url": ".",
-  "description": "My awesome Progressive Web App!",
+  "description": "Log all uou trainingdata!",
   "background_color": "#ffffff",
   "images": [
     {
-      "src": "C:\\YB\\Mobile_IOT_APPs2\\MIOT_Opdracht1\\src\\img\\logo.png"
+      "src": "H:\\H_Documenten\\MIOT_Opdracht1\\src\\img\\logo.png"
     }
   ]
 }

@@ -62,9 +62,9 @@ module.exports = {
       swSrc: './src/sw.js',
     }),
     new WebpackPwaManifest({
-      name: 'My Progressive Web App',
-      short_name: 'MyPWA',
-      description: 'My awesome Progressive Web App!',
+      name: 'MyTrainingsData',
+      short_name: 'MTD',
+      description: 'Log all uou trainingdata!',
       background_color: '#ffffff',
       crossorigin: 'use-credentials', //can be null, use-credentials or anonymous
       publicPath: './',
