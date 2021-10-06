@@ -254,11 +254,7 @@ $fa-font-path: "../../node_modules/@fortawesome/fontawesome-free/webfonts";
                 #hamburger_button {
                     display: block;
                     z-index: 10;
-                    background: rgb(0,0,0);
-                    background: -moz-linear-gradient(0deg, #5e60ce 0%, #6930c3 50%, #7400b8 100%);
-                    background: -webkit-linear-gradient(0deg, #5e60ce 0%, #6930c3 50%, #7400b8 100%);
-                    background: linear-gradient(0deg, #5e60ce 0%, #6930c3 50%, #7400b8 100%);
-                    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#ffc900",GradientType=1);
+                    background-color: #7400b8;
                     padding: 1vh;
                     text-align: right;
                     i{
