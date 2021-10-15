@@ -3,17 +3,17 @@ const router = express.Router();
 
 router.get('/', (req, res, next) => {
     res.status(200).json({
-        message: 'Handling GET requests to /products'
+        message: 'Handling GET requests to /activities'
     });
 });
 
 router.post('/', (req, res, next) => {
     res.status(201).json({
-        message: 'Handling POST requests to /products'
+        message: 'Handling POST requests to /activities'
     });
 });
 
-router.get('/:productId', (req, res, next) => {
+router.get('/:activitiesId', (req, res, next) => {
     const id = req.params.productId;
     if (id === 'special') {
         res.status(200).json({
@@ -27,13 +27,13 @@ router.get('/:productId', (req, res, next) => {
     }
 });
 
-router.patch('/:productId', (req, res, next) => {
+router.patch('/:activitiesId', (req, res, next) => {
     res.status(200).json({
         message: 'Updated product!'
     });
 });
 
-router.delete('/:productId', (req, res, next) => {
+router.delete('/:activitiesId', (req, res, next) => {
     res.status(200).json({
         message: 'Deleted product!'
     });
