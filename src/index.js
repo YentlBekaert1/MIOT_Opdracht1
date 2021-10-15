@@ -1,60 +1,99 @@
-import './styles/main.scss';
+import './js/navigation';
+import './css/style.scss';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './navigation';
-import _ from 'lodash';
-import Showdashboard from './dashboard';
+import logo from '../src/img/logo.png';
 
-const dashboard_button = document.getElementById("dashboard_tab");
-const calendar_button = document.getElementById("kalender_tab");
-const foodcorner_button = document.getElementById("food_corner_tab");
-const weather_button = document.getElementById("weather_tab");
-const performances_button = document.getElementById("performances_tab");
-const mainpanelappcontent = document.getElementById("mainpanelappcontent");
+// Needed for Hot Module Replacement
+if(typeof(module.hot) !== 'undefined') {
+    module.hot.accept() // eslint-disable-line no-undef  
+  }
 
-mainpanelappcontent.innerHTML = Showdashboard();
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').then(registration => {
+        console.log('SW registered: ', registration);
+      }).catch(registrationError => {
+        console.log('SW registration failed: ', registrationError);
+      });
+    });
+  }
 
-var active_tab = dashboard_button;
-var last_active_tab = dashboard_button;
-dashboard_button.classList.toggle('active');
+  var test = document.getElementById("logo")
 
-dashboard_button.addEventListener('click', () => {
-  active_tab = dashboard_button;
-  set_tab_active(active_tab);
-  mainpanelappcontent.innerHTML = Showdashboard();
-})
-calendar_button.addEventListener('click', () => {
-  active_tab = calendar_button;
-  set_tab_active(active_tab);
-})
-foodcorner_button.addEventListener('click', () => {
-  active_tab = foodcorner_button;
-  set_tab_active(active_tab);
-})
-weather_button.addEventListener('click', () => {
-  active_tab = weather_button;
-  set_tab_active(active_tab);
-})
-performances_button.addEventListener('click', () => {
-  active_tab = performances_button;
-  set_tab_active(active_tab);
-})
+  const myLogo = new Image();
+  myLogo.src = logo;
 
-function set_tab_active(tab){
-  tab.classList.toggle('active');
-  last_active_tab.classList.toggle('active');
-  last_active_tab = tab;
+  test.appendChild(myLogo);
+
+  'use strict';
+
+const applicationServerPublicKey = 'BGqgdQ3a3B98uvXiUcAm8w1DpPTkhLbYPDwUY6JTtEMMoeKR0eNXE_5wXdaCFKw3thk3RP66vszhh464kWczzEY';
+
+let isSubscribed = true;
+let swRegistration = null;
+
+function urlB64ToUint8Array(base64String) {
+  const padding = '='.repeat((4 - base64String.length % 4) % 4);
+  const base64 = (base64String + padding)
+    .replace(/\-/g, '+')
+    .replace(/_/g, '/');
+
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
 }
 
-
-
-function component() {
-    const element = document.createElement('div');
-
-     // Lodash, now imported by this script
-    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-  
-    return element;
+function subscribeUser() {
+  const applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey);
+  swRegistration.pushManager.subscribe({
+    userVisibleOnly: true,
+    applicationServerKey: applicationServerKey
+  })
+  .then(function(subscription) {
+    console.log(subscription);
+    isSubscribed = true;
+  })
+  .catch(function(err) {
+    console.log('Failed to subscribe the user: ', err);
+  });
 }
-  
-  document.getElementById("mainpanelappcontent").appendChild(component());
+
+function initializeUI() {
+  // Set the initial subscription value
+  swRegistration.pushManager.getSubscription()
+  .then(function(subscription) {
+    isSubscribed = !(subscription === null);
+
+    console.log(subscription);
+
+    if (isSubscribed) {
+      console.log('User IS subscribed.');
+    } else {
+      console.log('User is NOT subscribed.');
+    }
+  });
+
+  subscribeUser();
+}
+
+if ('serviceWorker' in navigator && 'PushManager' in window) {
+  console.log('Service Worker and Push is supported');
+
+  navigator.serviceWorker.register('sw.js')
+  .then(function(swReg) {
+    console.log('Service Worker is registered', swReg);
+
+    swRegistration = swReg;
+    initializeUI();
+  })
+  .catch(function(error) {
+    console.error('Service Worker Error', error);
+  });
+} else {
+  console.warn('Push messaging is not supported');
+}

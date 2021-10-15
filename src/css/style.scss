@@ -19,7 +19,6 @@ $fa-font-path: "../../node_modules/@fortawesome/fontawesome-free/webfonts";
         height: 100vh;
         display: block;
         #sidebar{
-            padding: 0px 10px;
             position: fixed;
             top: 0;
             height: 100%;
@@ -59,7 +58,7 @@ $fa-font-path: "../../node_modules/@fortawesome/fontawesome-free/webfonts";
             }
             div#sidebar_wrapper{
                 #user {
-                    min-height: 60px;
+                    min-height: 40px;
                     border-top: 1px solid $border-color;
                     border-bottom: 1px solid $border-color;
                     padding: 10px 0;
@@ -72,7 +71,6 @@ $fa-font-path: "../../node_modules/@fortawesome/fontawesome-free/webfonts";
                         right: 15px;
                         height: 1px;
                         width: calc(100% - 30px);
-                        background-color: hsla(0,0%,100%,.5);
                     }
                     #photo_user{
                         width: 34px;
@@ -139,7 +137,7 @@ $fa-font-path: "../../node_modules/@fortawesome/fontawesome-free/webfonts";
                                     font-size: .8142em;
                                     padding: 10px 8px;
                                     line-height: 1.625rem;
-                                    min-height: 50px;
+                                    min-height: 30px;
                                     span{
                                         font-size: .8142em;
                                     }
@@ -178,7 +176,7 @@ $fa-font-path: "../../node_modules/@fortawesome/fontawesome-free/webfonts";
                                 font-size: .8142em;
                                 padding: 10px 8px;
                                 line-height: 1.625rem;
-                                min-height: 50px;
+                                min-height: 35px;
                                 span{
                                     font-size: .8142em;
                                 }
@@ -220,6 +218,9 @@ $fa-font-path: "../../node_modules/@fortawesome/fontawesome-free/webfonts";
             float: right;
             width: calc(100% - 260px);
             transition: all .5s cubic-bezier(.685,.0473,.346,1);
+            #mainpanelappcontent{
+                padding:5px 20px;
+            }
             #hamburger_button {
                 display: none;
                 &:hover {
@@ -251,16 +252,16 @@ $fa-font-path: "../../node_modules/@fortawesome/fontawesome-free/webfonts";
                 &.open{
                     transform: translateX(260px);
                 }
+                #mainpanelappcontent{
+                    padding:25px 20px;
+                }
                 #hamburger_button {
+                    width:100%;
                     display: block;
                     z-index: 10;
-                    background: rgb(0,0,0);
-                    background: -moz-linear-gradient(0deg, #5e60ce 0%, #6930c3 50%, #7400b8 100%);
-                    background: -webkit-linear-gradient(0deg, #5e60ce 0%, #6930c3 50%, #7400b8 100%);
-                    background: linear-gradient(0deg, #5e60ce 0%, #6930c3 50%, #7400b8 100%);
-                    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#000000",endColorstr="#ffc900",GradientType=1);
-                    padding: 1vh;
-                    text-align: right;
+                    background-color: #7400b8;
+                    position: fixed;
+                    padding: 10px;
                     i{
                         color: $font-color;
                         
