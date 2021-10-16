@@ -23,10 +23,46 @@ server.get('/', (req, res, next) => {
   res.end()
   })
 })
-server.get('/', function(req, res){
-  res.send("Hello world from Express!!");
-});
-
+app.get("/calendar", (req, res) => {
+  compiler.outputFileSystem.readFile(HTML_FILE, (err, result) => {
+    if (err) {
+      return next(err)
+    }
+    res.set('content-type', 'text/html')
+    res.send(result)
+    res.end()
+    })
+})
+app.get("/foodcorner", (req, res) => {
+  compiler.outputFileSystem.readFile(HTML_FILE, (err, result) => {
+    if (err) {
+      return next(err)
+    }
+    res.set('content-type', 'text/html')
+    res.send(result)
+    res.end()
+    })
+})
+app.get("/weather", (req, res) => {
+  compiler.outputFileSystem.readFile(HTML_FILE, (err, result) => {
+    if (err) {
+      return next(err)
+    }
+    res.set('content-type', 'text/html')
+    res.send(result)
+    res.end()
+    })
+})
+app.get("/performances", (req, res) => {
+  compiler.outputFileSystem.readFile(HTML_FILE, (err, result) => {
+    if (err) {
+      return next(err)
+    }
+    res.set('content-type', 'text/html')
+    res.send(result)
+    res.end()
+    })
+})
 const PORT = process.env.PORT || 8080
 server.listen(PORT, () => {
     console.log(`App listening to ${PORT}....`)

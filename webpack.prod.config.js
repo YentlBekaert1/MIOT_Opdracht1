@@ -4,9 +4,10 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest')
 
+
 module.exports = {
   entry: {
-    main: './src/index.js'
+    main: './src/index.js',
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -21,9 +22,6 @@ module.exports = {
         // Transpiles ES6-8 into ES5
         test: /\.js$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader"
-        }
       },
       {
         // Loads the javacript into html template provided.
@@ -66,10 +64,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new HtmlWebPackPlugin({
-      template: "./src/html/index.html",
-      filename: "./index.html"
-    }),
     new WorkboxPlugin.InjectManifest({
       swSrc: './src/sw.js',
       maximumFileSizeToCacheInBytes: 20*1024*1024
@@ -106,6 +100,11 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "[name].css",
       chunkFilename: "[id].css"
-    })
+    }),
+    new HtmlWebPackPlugin({
+      filename: "./index.html",
+      excludeChunks: [ 'server' ],
+      template: './src/html/index.html',
+    }),
   ]
 }

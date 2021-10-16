@@ -138,6 +138,7 @@ $fa-font-path: "../../node_modules/@fortawesome/fontawesome-free/webfonts";
                                     padding: 10px 8px;
                                     line-height: 1.625rem;
                                     min-height: 30px;
+                                    
                                     span{
                                         font-size: .8142em;
                                     }
@@ -165,6 +166,7 @@ $fa-font-path: "../../node_modules/@fortawesome/fontawesome-free/webfonts";
                         list-style: none;
                         padding: 0;
                         li{
+                            a{
                                 margin: 10px 5px 0;
                                 border-radius: 30px;
                                 color: $font-color;
@@ -194,17 +196,15 @@ $fa-font-path: "../../node_modules/@fortawesome/fontawesome-free/webfonts";
                                     background-color: rgba(255,255,255,0.2); 
                                     transition: all .3s cubic-bezier(.685,.0473,.346,1);
                                 }
-                            
-                            &.active{
-                                
-                                
+                                &.active{
                                     background-color: rgba(255,255,255,0.8);
                                     color:#7400b8;
-                                
-                                i{
-                                    color:#7400b8;
+                                    i{
+                                        color:#7400b8;
+                                    }
                                 }
-                            }
+                             }
+                            
                         }
                         
                     }
@@ -254,13 +254,15 @@ $fa-font-path: "../../node_modules/@fortawesome/fontawesome-free/webfonts";
                 }
                 #mainpanelappcontent{
                     padding:25px 20px;
+                    min-height: 100vh;
+                    display: block;
+                    z-index: 10;
                 }
                 #hamburger_button {
                     width:100%;
                     display: block;
                     z-index: 10;
                     background-color: #7400b8;
-                    position: fixed;
                     padding: 10px;
                     i{
                         color: $font-color;

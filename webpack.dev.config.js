@@ -21,7 +21,6 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: "babel-loader",
       },
       {
         // Loads the javacript into html template provided.
@@ -62,9 +61,9 @@ module.exports = {
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: "./src/html/index.html",
       filename: "./index.html",
-      excludeChunks: [ 'server' ]
+      excludeChunks: [ 'server' ],
+      template: './src/html/index.html',
     }),
     new WorkboxPlugin.InjectManifest({
       swSrc: './src/sw.js',
