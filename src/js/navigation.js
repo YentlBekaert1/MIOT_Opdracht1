@@ -3,6 +3,7 @@ import Showcalendar from './calendar';
 import Showfoodcorner from './foodcorner';
 import Showweather from './weather';
 import Showperformances from './performances';
+import makeCalendar from './fullcalendar';
 
 'use strict';
 
@@ -22,7 +23,13 @@ const getParams = match => {
 
 const navigateTo = url => {
     history.pushState(null, null, url);
-    router();
+    router().then(value =>{
+    if(window.location.href.indexOf('calendar')>0){
+       // console.log('calendar');
+        //console.log(document.getElementById('calendar'));
+        var calendarEl = document.getElementById('calendar');
+        makeCalendar(calendarEl);
+    }});
 };
 
 const router = async () => {
