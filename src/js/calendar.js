@@ -8,14 +8,10 @@ export default class extends AbstractView {
       }
   
       async getHtml() {
-          return `
-            
-              <h1>Calendar</h1>
-              <p>
-                  Fugiat voluptate et nisi Lorem cillum anim sit do eiusmod occaecat irure do. Reprehenderit anim fugiat sint exercitation consequat. Sit anim laborum sit amet Lorem adipisicing ullamco duis. Anim in do magna ea pariatur et.
-              </p>
-              <div id="calendar"></div>
-          `;
+          let calendar_div = document.createElement('div');
+          calendar_div.id = "calendar";
+
+          return calendar_div;
            
       }
-  }
+}

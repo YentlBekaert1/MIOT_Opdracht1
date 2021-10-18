@@ -28,7 +28,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     myLogo.src = logo;
     test.appendChild(myLogo);
 
-    const applicationServerPublicKey = 'BGqgdQ3a3B98uvXiUcAm8w1DpPTkhLbYPDwUY6JTtEMMoeKR0eNXE_5wXdaCFKw3thk3RP66vszhh464kWczzEY';
+    const applicationServerPublicKey = 'BJh_MsMpiMnUgiP7pZO7nR00kmgoIWv0DM0OvSL85LPOypjveULl_yGcUAD_Q-2au6Thw8nWlk8rqIOneTnAAa0';
 
     let isSubscribed = true;
     let swRegistration = null;
@@ -97,4 +97,5 @@ window.addEventListener('DOMContentLoaded', (event) => {
     } else {
       console.warn('Push messaging is not supported');
     }
+    
 });

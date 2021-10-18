@@ -23,13 +23,7 @@ const getParams = match => {
 
 const navigateTo = url => {
     history.pushState(null, null, url);
-    router().then(value =>{
-    if(window.location.href.indexOf('calendar')>0){
-       // console.log('calendar');
-        //console.log(document.getElementById('calendar'));
-        var calendarEl = document.getElementById('calendar');
-        makeCalendar(calendarEl);
-    }});
+    router();
 };
 
 const router = async () => {
@@ -61,24 +55,26 @@ const router = async () => {
     }
 
     const view = new match.route.view(getParams(match));
+    const lastchild = document.querySelector("#mainpanelappcontent > div");
 
-    document.querySelector("#mainpanelappcontent").innerHTML = await view.getHtml();
+    view.getHtml().then(
+        value => {
+            lastchild.parentNode.replaceChild(value,lastchild);
+            return value;
+        } 
+    ).then( 
+        value => {
+            if(value.id == "calendar"){
+                makeCalendar(value)
+            }
+        }
+    )
 };
 
-window.addEventListener("popstate", router);
-
-document.addEventListener("DOMContentLoaded", () => {
-    document.body.addEventListener("click", e => {
-        if (e.target.matches("[data-link]")) {
-            e.preventDefault();
-            navigateTo(e.target.href);
-        }
-    });
-
-    router();
-});
+window.addEventListener("popstate", router());
 
 window.addEventListener('DOMContentLoaded', (event) => {
+    console.log("dom loaded")
     document.getElementById('user_options').style.height = "0px";
     document.getElementById('user_button').onclick = function(){
         if(document.getElementById('user_options').style.height == "0px"){
@@ -112,68 +108,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
     let hamburgerBtn = document.getElementById('hamburger_button');
     hamburgerBtn.addEventListener('click', () => {
         sidebar.classList.toggle('open');
-        //mainpanelapp.classList.toggle('open');
-    });
-    
-/*
-    let dashboard_button = document.getElementById("dashboard_tab");
-    let calendar_button = document.getElementById("kalender_tab");
-    let foodcorner_button = document.getElementById("food_corner_tab");
-    let weather_button = document.getElementById("weather_tab");
-    let performances_button = document.getElementById("performances_tab");
-
-    let mainpanelappcontent = document.getElementById("mainpanelappcontent");
-    mainpanelappcontent.replaceWith(Showdashboard());
-    mainpanelappcontent.addEventListener('click', () => {
-        sidebar.classList.toggle('open');
     });
 
-    active_tab = dashboard_button;
-    last_active_tab = dashboard_button;
-    dashboard_button.classList.toggle('active');
-    
-    
-    dashboard_button.addEventListener('click', () => {
-        active_tab = dashboard_button;
-        sidebar.classList.toggle('open');
-        set_tab_active(active_tab);
-        const mainpanelappcontent = document.getElementById("mainpanelappcontent");
-        mainpanelappcontent.replaceWith(Showdashboard());
-    })
-    calendar_button.addEventListener('click', () => {
-        active_tab = calendar_button;
-        sidebar.classList.toggle('open');
-        set_tab_active(active_tab);
-        const mainpanelappcontent = document.getElementById("mainpanelappcontent");
-        mainpanelappcontent.replaceWith(Showcalendar());
-    })
-    foodcorner_button.addEventListener('click', () => {
-        active_tab = foodcorner_button;
-        sidebar.classList.toggle('open');
-        set_tab_active(active_tab);
-        const mainpanelappcontent = document.getElementById("mainpanelappcontent");
-        mainpanelappcontent.replaceWith(Showfoodcorner());
-    })
-    weather_button.addEventListener('click', () => {
-        active_tab = weather_button;
-        sidebar.classList.toggle('open');
-        set_tab_active(active_tab);
-        const mainpanelappcontent = document.getElementById("mainpanelappcontent");
-        mainpanelappcontent.replaceWith(Showweather());
-    })
-    performances_button.addEventListener('click', () => {
-        active_tab = performances_button;
-        sidebar.classList.toggle('open');
-        set_tab_active(active_tab);
-        const mainpanelappcontent = document.getElementById("mainpanelappcontent");
-        mainpanelappcontent.replaceWith(Showperformances());
-    })
-    
-    function set_tab_active(tab){
-        tab.classList.toggle('active');
-        last_active_tab.classList.toggle('active');
-        last_active_tab = tab;
-    }
-*/
+    document.body.addEventListener("click", e => {
+        if (e.target.matches("[data-link]")) {
+            e.preventDefault();
+            navigateTo(e.target.href);
+        }
+    });
 
+    router();
 }); 

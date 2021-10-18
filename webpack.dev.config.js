@@ -71,9 +71,9 @@ module.exports = {
     }),
     new WebpackPwaManifest({
       name: 'MyTrainingsData',
-      short_name: 'MTD',
+      short_name: 'MyTrainingsData',
       description: 'Log all your trainingdata!',
-      background_color: '#ffffff',
+      background_color: '#f2f2f2',
       crossorigin: 'use-credentials', //can be null, use-credentials or anonymous
       publicPath: './',
       icons: [

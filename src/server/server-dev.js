@@ -23,7 +23,7 @@ server.get('/', (req, res, next) => {
   res.end()
   })
 })
-app.get("/calendar", (req, res) => {
+server.get("/calendar", (req, res) => {
   compiler.outputFileSystem.readFile(HTML_FILE, (err, result) => {
     if (err) {
       return next(err)
@@ -33,7 +33,7 @@ app.get("/calendar", (req, res) => {
     res.end()
     })
 })
-app.get("/foodcorner", (req, res) => {
+server.get("/foodcorner", (req, res) => {
   compiler.outputFileSystem.readFile(HTML_FILE, (err, result) => {
     if (err) {
       return next(err)
@@ -43,7 +43,7 @@ app.get("/foodcorner", (req, res) => {
     res.end()
     })
 })
-app.get("/weather", (req, res) => {
+server.get("/weather", (req, res) => {
   compiler.outputFileSystem.readFile(HTML_FILE, (err, result) => {
     if (err) {
       return next(err)
@@ -53,7 +53,7 @@ app.get("/weather", (req, res) => {
     res.end()
     })
 })
-app.get("/performances", (req, res) => {
+server.get("/performances", (req, res) => {
   compiler.outputFileSystem.readFile(HTML_FILE, (err, result) => {
     if (err) {
       return next(err)

@@ -7,11 +7,11 @@ export default class extends AbstractView {
       }
   
       async getHtml() {
-          return `
-              <h1>Foodcorner</h1>
-              <p>
-                  Fugiat voluptate et nisi Lorem cillum anim sit do eiusmod occaecat irure do. Reprehenderit anim fugiat sint exercitation consequat. Sit anim laborum sit amet Lorem adipisicing ullamco duis. Anim in do magna ea pariatur et.
-              </p>
-          `;
+        let foodcorner_div = document.createElement('div');
+        foodcorner_div.id = "foodcorner";
+        let title = document.createElement('h1');
+        title.innerText = "Foodcorner page"
+        foodcorner_div.appendChild(title);
+        return foodcorner_div;
       }
   }
