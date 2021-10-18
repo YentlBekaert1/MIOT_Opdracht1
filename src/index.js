@@ -13,89 +13,62 @@ window.addEventListener('DOMContentLoaded', (event) => {
       module.hot.accept() // eslint-disable-line no-undef  
     }
 
-  if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js').then(registration => {
-          console.log('SW registered: ', registration);
-        }).catch(registrationError => {
-          console.log('SW registration failed: ', registrationError);
-        });
-      });
-    }
-
     var test = document.getElementById("logo")
     const myLogo = new Image();
     myLogo.src = logo;
     test.appendChild(myLogo);
 
-    const applicationServerPublicKey = 'BJh_MsMpiMnUgiP7pZO7nR00kmgoIWv0DM0OvSL85LPOypjveULl_yGcUAD_Q-2au6Thw8nWlk8rqIOneTnAAa0';
-
-    let isSubscribed = true;
-    let swRegistration = null;
-
-    function urlB64ToUint8Array(base64String) {
-      const padding = '='.repeat((4 - base64String.length % 4) % 4);
-      const base64 = (base64String + padding)
-        .replace(/\-/g, '+')
-        .replace(/_/g, '/');
-
-      const rawData = window.atob(base64);
-      const outputArray = new Uint8Array(rawData.length);
-
-      for (let i = 0; i < rawData.length; ++i) {
-        outputArray[i] = rawData.charCodeAt(i);
-      }
-      return outputArray;
-    }
-
-    function subscribeUser() {
-      const applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey);
-      swRegistration.pushManager.subscribe({
-        userVisibleOnly: true,
-        applicationServerKey: applicationServerKey
-      })
-      .then(function(subscription) {
-        console.log(subscription);
-        isSubscribed = true;
-      })
-      .catch(function(err) {
-        console.log('Failed to subscribe the user: ', err);
-      });
-    }
-
-    function initializeUI() {
-      // Set the initial subscription value
-      swRegistration.pushManager.getSubscription()
-      .then(function(subscription) {
-        isSubscribed = !(subscription === null);
-
-        console.log(subscription);
-
-        if (isSubscribed) {
-          console.log('User IS subscribed.');
-        } else {
-          console.log('User is NOT subscribed.');
-        }
-      });
-
-      subscribeUser();
-    }
 
     if ('serviceWorker' in navigator && 'PushManager' in window) {
       console.log('Service Worker and Push is supported');
-
       navigator.serviceWorker.register('sw.js')
-      .then(function(swReg) {
-        console.log('Service Worker is registered', swReg);
-
-        swRegistration = swReg;
-        initializeUI();
-      })
-      .catch(function(error) {
-        console.error('Service Worker Error', error);
+      fetch('./push/key')
+      .then(function(res) {
+          res.json().then(function(data) {
+              registerPush(data.key);
+          });
       });
     } else {
       console.warn('Push messaging is not supported');
     }
+
+    function registerPush(appPubkey) {
+      navigator.serviceWorker.ready.then(function(registration) {
+          return registration.pushManager.getSubscription()
+              .then(function(subscription) {
+                  if (subscription) {
+                      return subscription;
+                  }
+  
+                  return registration.pushManager.subscribe({
+                      userVisibleOnly: true,
+                      applicationServerKey: urlBase64ToUint8Array(appPubkey)
+                  });
+              }) 
+              .then(function(subscription) {
+                  return fetch('./push/subscribe', {
+                      method: 'post',
+                      headers: { 'Content-type': 'application/json' },
+                      body: JSON.stringify({ subscription: subscription })
+                  });
+              });
+      });
+  }
+  
+  function urlBase64ToUint8Array(base64String) {
+      var padding = '='.repeat((4 - base64String.length % 4) % 4);
+      var base64 = (base64String + padding)
+          .replace(/\-/g, '+')
+          .replace(/_/g, '/');
+  
+      var rawData = window.atob(base64);
+      var outputArray = new Uint8Array(rawData.length);
+  
+      for (var i = 0; i < rawData.length; ++i)  {
+          outputArray[i] = rawData.charCodeAt(i);
+      }
+  
+      return outputArray;
+  }
     
 });

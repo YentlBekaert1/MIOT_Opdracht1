@@ -7,7 +7,6 @@ precacheAndRoute(self.__WB_MANIFEST);
 
 'use strict';
 
-const applicationServerPublicKey = 'BGqgdQ3a3B98uvXiUcAm8w1DpPTkhLbYPDwUY6JTtEMMoeKR0eNXE_5wXdaCFKw3thk3RP66vszhh464kWczzEY';
 
 /* eslint-enable max-len */
 

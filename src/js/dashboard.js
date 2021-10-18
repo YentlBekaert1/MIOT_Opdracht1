@@ -46,7 +46,14 @@ export default class extends AbstractView {
                   var act_obj = {"name":data[a].name,"summery":data[a].description,"activity_id":data[a].id,"user_id":1};
                   data_to_send.push(act_obj);
                 }
+               
+                
           });
+          let notification_button = document.createElement('button');
+          notification_button.id = "notification_button";
+          notification_button.innerHTML = "get notification"
+          dashboard_div.appendChild(notification_button);
+          
         return dashboard_div;
       }
   }

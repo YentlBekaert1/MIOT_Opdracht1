@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "buildDev": "del dist && webpack --mode development --config webpack.server.config.js && webpack --mode development --config webpack.dev.config.js",
     "buildProd": "del dist && webpack --mode production --config webpack.server.config.js && webpack --mode production --config webpack.prod.config.js",
     "start": "node ./dist/server.js"
   },
@@ -21,7 +20,8 @@
     "bootstrap": "^5.1.3",
     "express": "^4.17.1",
     "routes": "^2.1.0",
-    "web-push": "^3.4.5"
+    "web-push": "^3.4.5",
+    "webpack-body-parser": "^1.11.110"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
@@ -33,6 +33,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^6.3.0",
+    "exports-loader": "^3.0.0",
     "file-loader": "^6.2.0",
     "firebase-cli": "^1.2.0",
     "firebase-tools": "^9.19.0",
