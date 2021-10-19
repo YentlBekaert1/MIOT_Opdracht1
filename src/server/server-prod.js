@@ -4,7 +4,6 @@ import { pushWeb , vkey}  from './configured-web-push';
 import { subsription } from '../db/db';
 
 const activityRoutes = require('../api/routes/activities');
-
 const app = express(),
             DIST_DIR = __dirname,
             HTML_FILE = path.join(DIST_DIR, 'index.html');
@@ -18,7 +17,7 @@ app.use(express.urlencoded({
 }));
 
 app.get('/', (req, res) => {
-    res.sendFile(HTML_FILE)
+    res.sendFile(HTML_FILE);
 })
 app.get("/get", (req, res) => {
     res.json("test");
@@ -48,6 +47,7 @@ app.get('/push/key', async function(req, res) {
       });
   }
 });
+
 
 app.post('/push/subscribe', async function(req, res) {
   try {
@@ -112,7 +112,7 @@ app.post('/push/notify', async function(req, res) {
 app.post('/push/notify-demo', async function(req, res) {
   try {
       const ObjectId = require('mongoose').Types.ObjectId;
-      const sub = await subsription.findOne({ _id: new ObjectId("616dd2ca1c442daab9021e8f") });
+      const sub = await subsription.findOne({ _id: new ObjectId("616e91ac9693ad205b466de5") });
       await pushWeb.sendNotification(sub, JSON.stringify({title: 'Annoyed yet?', message: 'Hello there!'}), { contentEncoding: 'aes128gcm' })
           .then(function (response) {
               console.log('Response: ' + JSON.stringify(response, null, 4));

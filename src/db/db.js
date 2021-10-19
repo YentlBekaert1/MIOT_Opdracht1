@@ -1,4 +1,4 @@
-const databaseConnectionURI = process.env.DATABASE_CONNECTION_URI || 'mongodb+srv://app:yentlmtd@cluster0.s2fwk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const databaseConnectionURI = process.env.DATABASE_CONNECTION_URI || 'mongodb+srv://app:mytrainingsdata@cluster0.s2fwk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
 if (databaseConnectionURI === '') {
     console.error('Database connection URI not defined.');
