@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "buildProd": "del dist && webpack --mode production --config webpack.server.config.js && webpack --mode production --config webpack.prod.config.js",
-    "start": "node ./dist/server.js"
+    "buildProd": "del dist && webpack",
+    "web": "http-server dist"
   },
   "keywords": [],
   "author": "",

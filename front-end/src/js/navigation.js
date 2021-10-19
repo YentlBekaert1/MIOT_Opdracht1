@@ -4,7 +4,7 @@ import Showfoodcorner from './foodcorner';
 import Showweather from './weather';
 import Showperformances from './performances';
 import makeCalendar from './fullcalendar';
-import send_notification from '../notifications/send_notification'
+
 
 'use strict';
 
@@ -70,8 +70,7 @@ const router = async () => {
             }
             if(value.id == "dashboard"){
                 console.log(value)
-                console.log(value.lastChild)
-                send_notification(value);
+                console.log(value.lastChild);
             }
         }
     )

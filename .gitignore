@@ -5,3 +5,5 @@ firebase.json
 public
 .vscode
 .deployment
+back-end/node_modules
+front-end/node_modules

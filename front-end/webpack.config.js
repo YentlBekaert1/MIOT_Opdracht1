@@ -6,13 +6,15 @@ const WebpackPwaManifest = require('webpack-pwa-manifest')
 
 
 module.exports = {
+  mode: 'development',
   entry: {
     main: './src/index.js',
   },
   output: {
     path: path.join(__dirname, 'dist'),
     publicPath: '/',
-    filename: '[name].js'
+    filename: '[name].js',
+    clean: true,
   },
   target: 'web',
   devtool: 'source-map',

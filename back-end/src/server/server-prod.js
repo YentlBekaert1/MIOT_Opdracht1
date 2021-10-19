@@ -1,40 +1,21 @@
-import path from 'path'
 import express from 'express'
 import { pushWeb , vkey}  from './configured-web-push';
 import { subsription } from '../db/db';
+import cors from 'cors'
 
 const activityRoutes = require('../api/routes/activities');
 const app = express(),
-            DIST_DIR = __dirname,
-            HTML_FILE = path.join(DIST_DIR, 'index.html');
+            DIST_DIR = __dirname;
 
 app.disable('x-powered-by');
             
 app.use(express.static(DIST_DIR));
+app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({
   extended: true
 }));
 
-app.get('/', (req, res) => {
-    res.sendFile(HTML_FILE);
-})
-app.get("/get", (req, res) => {
-    res.json("test");
-})
-app.get("/calendar", (req, res) => {
-    res.sendFile(HTML_FILE);
-})
-app.get("/foodcorner", (req, res) => {
-    res.sendFile(HTML_FILE)
-})
-app.get("/weather", (req, res) => {
-    res.sendFile(HTML_FILE)
-})
-app.get("/performances", (req, res) => {
-    res.sendFile(HTML_FILE)
-})
-app.use('/activities', activityRoutes);
 
 app.get('/push/key', async function(req, res) {
   if (vkey !== '') {
@@ -47,7 +28,6 @@ app.get('/push/key', async function(req, res) {
       });
   }
 });
-
 
 app.post('/push/subscribe', async function(req, res) {
   try {
@@ -128,7 +108,7 @@ app.post('/push/notify-demo', async function(req, res) {
   }
 });
 
-const PORT = process.env.PORT || 8080
+const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
     console.log(`App listening to ${PORT}....`)
     console.log('Press Ctrl+C to quit.')
