@@ -6,7 +6,7 @@ const WebpackPwaManifest = require('webpack-pwa-manifest')
 
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: {
     main: './src/index.js',
   },

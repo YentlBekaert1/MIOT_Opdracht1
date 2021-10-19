@@ -8,10 +8,6 @@ import logo from '../src/img/logo.png';
 
 window.addEventListener('DOMContentLoaded', (event) => {
 
-  // Needed for Hot Module Replacement
-  if(typeof(module.hot) !== 'undefined') {
-      module.hot.accept() // eslint-disable-line no-undef  
-    }
 
     var test = document.getElementById("logo")
     const myLogo = new Image();
@@ -22,7 +18,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     if ('serviceWorker' in navigator && 'PushManager' in window) {
       console.log('Service Worker and Push is supported');
       navigator.serviceWorker.register('sw.js')
-      fetch('/push/key')
+      fetch('https://apimytrainingsdata.azurewebsites.net/push/key')
       .then(function(res) {
           res.json().then(function(data) {
               registerPush(data.key);
@@ -33,27 +29,32 @@ window.addEventListener('DOMContentLoaded', (event) => {
     }
 
     function registerPush(appPubkey) {
-      navigator.serviceWorker.ready.then(function(registration) {
+      navigator.serviceWorker.ready.then(
+          function(registration) {
           return registration.pushManager.getSubscription()
               .then(function(subscription) {
-                  if (subscription) {
-                      return subscription;
+                 let isSubscribed = !(subscription === null);
+                  if (isSubscribed) {
+                    console.log("user is subscirbed");
+                    return subscription;
                   }
-  
-                  return registration.pushManager.subscribe({
-                      userVisibleOnly: true,
-                      applicationServerKey: urlBase64ToUint8Array(appPubkey)
-                  });
+                  else{
+                        console.log("user is NOT subscirbed");
+                        return registration.pushManager.subscribe({
+                        userVisibleOnly: true,
+                        applicationServerKey: urlBase64ToUint8Array(appPubkey)
+                    });
+                    }
               }) 
               .then(function(subscription) {
-                  return fetch('/push/subscribe', {
+                  return fetch('https://apimytrainingsdata.azurewebsites.net/push/subscribe', {
                       method: 'post',
                       headers: { 'Content-type': 'application/json' },
                       body: JSON.stringify({ subscription: subscription })
                   });
               });
       });
-  }
+    }
   
   function urlBase64ToUint8Array(base64String) {
       var padding = '='.repeat((4 - base64String.length % 4) % 4);
