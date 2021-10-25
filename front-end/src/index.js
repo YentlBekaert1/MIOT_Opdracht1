@@ -18,7 +18,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     if ('serviceWorker' in navigator && 'PushManager' in window) {
       console.log('Service Worker and Push is supported');
       navigator.serviceWorker.register('sw.js')
-      fetch('https://apimytrainingsdata.azurewebsites.net/push/key')
+      fetch('https://apimtd.azurewebsites.net/push/key')
       .then(function(res) {
           res.json().then(function(data) {
               registerPush(data.key);
@@ -47,7 +47,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
               }) 
               .then(function(subscription) {
-                  return fetch('https://apimytrainingsdata.azurewebsites.net/push/subscribe', {
+                  return fetch('https://apimtd.azurewebsites.net/push/subscribe', {
                       method: 'post',
                       headers: { 'Content-type': 'application/json' },
                       body: JSON.stringify({ subscription: subscription })
