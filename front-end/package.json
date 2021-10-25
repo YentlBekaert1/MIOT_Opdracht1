@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@capacitor/core": "^3.2.5",
     "@fullcalendar/core": "^5.10.0",
     "@fullcalendar/daygrid": "^5.10.0",
     "@fullcalendar/interaction": "^5.10.0",
@@ -26,6 +27,7 @@
   "devDependencies": {
     "@babel/core": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
+    "@capacitor/cli": "^3.2.5",
     "@fortawesome/fontawesome-free": "^5.15.4",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.2.2",
